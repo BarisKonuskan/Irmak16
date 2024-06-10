@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
+
+  <title>IRMAK-16</title>
+
+
+
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/simple-sidebar.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-multiselect.css' %}">
+  <link rel="stylesheet" href="{% static 'css/jquery.dataTables.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+
+<style>
+  table  {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+}
+</style>
+
+ <style>
+nav {
+    height: 57px;
+    background: linear-gradient(to right, #4d78f8 0%, #ffffff 100%)
+}
+body {
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+  <div class="d-flex " id="wrapper">
+ {% include "sidebare.html" %}
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+
+      <nav class="navbar navbar-expand-lg navbar-light border-bottom d-print-none">
+        <button class="btn btn-danger mr-sm-2 d-print-none" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></button>
+        <a class="btn btn btn-danger mr-sm-2 d-print-none" href="/"><i class="fa fa-home "></i> </a>
+      </nav>
+
+        {% block body %}
+
+
+        {% endblock body %}
+        </div>
+        </div>
+
+
+     <script>
+$(document).ready(function() {
+    $('a[href$="' + location.pathname + '"]').addClass('active');
+});
+
+  </script> 
+
+
+<script>
+  $("#menu-toggle").click(function (e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+</script>
+
+<script>  
+  // JavaScript code to toggle the sidebar on page load  
+  window.addEventListener('DOMContentLoaded', (event) => {  
+    document.getElementById('wrapper').classList.add('toggled');  
+  });  
+</script>  
+
+
+</body>
+</html>
+  

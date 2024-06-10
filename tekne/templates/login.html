@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+		<!-- Main content -->
+	<div class="content-wrapper">
+
+			<!-- Content area -->
+		<div class="content d-flex justify-content-center align-items-center">
+
+			
+
+		
+
+
+			<form method="post" >
+            {% csrf_token %}
+				<div class="card mb-0" style="max-width: 300px;width: 300px;">
+						<div class="card-body">
+							<div class="text-center mb-3">
+								<img class="card mb-0" style="max-width: 300px;width: 260px;" src="{% static 'MAK16.jpg' %}"/>
+								<br>
+								<h5 class="mb-0">IRMAK-16</h5>
+								<span class="d-block text-muted">Member Login</span>
+							</div>
+  						<div class="form-group form-group-feedback form-group-feedback-left">
+							<input type="text" class="form-control"  name="username" autofocus="" placeholder="Username" required="" id="id_username">
+							<div class="form-control-feedback">
+								<i class="icon-user text-muted"></i>
+							</div>
+								
+						</div>
+
+						<div class="form-group form-group-feedback form-group-feedback-left">
+							<input type="password" class="form-control" placeholder="Password" name="password" required="" id="id_password">
+							<div class="form-control-feedback">
+								<i class="icon-lock2 text-muted"></i>
+							</div>
+								
+						</div>
+
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary btn-block">Login<i class="icon-circle-right2 ml-2"></i></button>
+						</div>
+					</div>
+                      {% if messages %}
+
+  {% for message in messages %}
+  <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</div>
+  {% endfor %}
+
+  {% endif %}
+
+
+				</div>		
+			</form>
+		</div>
+		<!-- /content area -->
+
+
+			
+
+	</div>
+	<!-- /main content -->
+
+
+{% endblock %}

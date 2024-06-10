@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block body %}
+
+<div class="container fullfield">
+
+<br>
+  <h5 class="text-center">IRMAK-16</h5>
+    <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+
+<br>
+<div class="col col-xl-12 " >
+  <div id="container" >
+  <div class="form-row align-items-center">
+  <div class="col-auto">
+ <a class="btn btn-sm btn-primary " href="/" role="button" ><i class="fa fa-arrow-left" aria-hidden="true"></i> back </a>
+  </div>
+  <div class="col-auto">
+         <div class="dropdown show">
+ 
+  <a class="btn btn-sm btn-secondary dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Select Year
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="./mkpills24">2024</a>
+    <a class="dropdown-item" href="./mkpills25">2025</a>
+    <a class="dropdown-item" href="./mkpills26">2026</a>
+  </div>
+  </div>
+  </div>
+ 
+</div> 
+<br>
+<div class="container-fluid" >
+
+  <table class="table text-sm table-striped table-bordered" style="width:20%" id="myTable1" >
+  <thead >
+   <tr >
+      <th class="bg-primary text-center text-white font-weight-bold "style="width: 11.111%">2026</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+      
+  <td> 
+  {% for new in month_table %}
+  <div class="card bg-primary " >
+  <a class= "btn btn-sm btn-primary  text-center font-weight-bold" >{{ new.month}} </a>
+
+  <a class= "btn btn-sm btn-light text-dark  text-center " >{{ new.total}} </a>
+  </div>
+  <hr class= " mt-1 mb-1 " >
+  {% endfor %}     
+  </td>
+  
+   </tr>
+  
+  </tbody>
+  </table>
+
+</div>
+    <canvas id="myChart1"></canvas>
+    <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+    <canvas id="myChart2"></canvas>
+
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/jquery-2.1.3.js' %}"></script>
+        <script src="{% static 'js/Chart.bundle.min.js' %}"></script>
+
+
+
+<script>
+  var ctx = document.getElementById('myChart1').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: {{labels |safe }},
+        datasets: [{ 
+            data: {{data |safe }},
+            label:'2026',
+            borderColor: "rgb(62,149,205)",
+            backgroundColor: "rgb(62,149,205,0.4)",
+            borderWidth:2
+          },
+        ]
+      },
+      options: {
+      legend: { display: true },
+      title: {
+        display: true,
+        text: 'Toplam Aylık Gelir'
+      }
+    }
+    });
+</script>
+
+
+<script>
+  var ctx = document.getElementById('myChart2').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: {{labels2 |safe }},
+        datasets: [{ 
+            data: {{data2 |safe }},
+            label:'Year',
+            borderColor: "rgb(62,149,205)",
+            backgroundColor: "rgb(62,149,205,0.1)",
+            borderWidth:2
+          },
+        ]
+      },
+      options: {
+      legend: { display: true },
+      title: {
+        display: true,
+        text: 'Toplam Yıllık Gelir'
+      }
+    }
+    });
+</script>
+    {% endblock body %}    

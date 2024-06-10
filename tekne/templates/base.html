@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>IRMAK-16</title>
+
+
+ <style>
+nav {
+    height: 57px;
+    background: linear-gradient(to right, #4d78f8 0%, #ffffff 100%)
+}
+</style>
+
+      <nav class="navbar navbar-expand-lg navbar-light border-bottom d-print-none"></nav>
+
+      
+	<!-- Global stylesheets -->
+
+	<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/bootstrap_limitless.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/layout.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/components.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/colors.min.css' %}" rel="stylesheet" type="text/css">
+	
+</head>
+<body>
+
+    {% block content %}
+    {% endblock %}
+
+            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script>
+$('#exampleModal').on('show.bs.modal', function () {
+  // do something…
+})
+</script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+{% load static %}
+
+
+<div class="container-fluid" >
+  <table class="table text-sm table-striped table-bordered" style="width:100%" id="myTable" >
+    <thead >
+   <tr >
+
+      <th class="bg-primary text-center text-white font-weight-bold "style="width: 11.111%">07:00/12:00
+
+      </th>
+  
+      <th class="bg-info  text-center text-dark font-weight-bold" style=" width: 11.111%"  >12:30/17:30
+
+      </th>
+   
+       <th class="bg-success text-center text-dark font-weight-bold" style="width: 11.111%" >18:00/23:00
+
+
+      </th>
+  
+          <th class="bg-warning text-center text-dark font-weight-bold" style="width: 11.111%" >24:00/07:00
+   
+      </th>
+  
+      </tr>
+  
+    </thead>
+    <tbody>
+  
+     <tr>
+      
+  <td> 
+  {% for new in tur1_table %}
+  <div class="card bg-primary " >
+  <a class= "btn btn-sm btn-primary  text-center font-weight-bold" href="./rezerveedit1/{{ new.id }}">{{ new.adet}} </a>
+  {% if new.tamucret == 'Açık' %}
+  <a class= "btn btn-sm btn-light  text-center " style="background-color:yellow;"  >{{ new.tarih }} </a>
+  {% else %}
+    <a class= "btn btn-sm btn-light text-dark  text-center " >{{ new.tarih}} </a>
+    {% endif %}
+  </div>
+  <hr class= " mt-1 mb-1 " >
+  {% endfor %}     
+  </td>
+  
+  <td> 
+    {% for new in tur2_table %}
+    <div class="card bg-info " >
+    <a class= "btn btn-sm btn-info  text-center font-weight-bold" href="./rezerveedit1/{{ new.id }}">{{ new.adet}} </a>
+    {% if new.tamucret == 'Açık' %}
+    <a class= "btn btn-sm btn-light  text-center " style="background-color:yellow;"  >{{ new.tarih }} </a>
+    {% else %}
+      <a class= "btn btn-sm btn-light text-dark  text-center " >{{ new.tarih}} </a>
+      {% endif %}
+    </div>
+    <hr class= " mt-1 mb-1 " >
+    {% endfor %}     
+    </td>
+         
+    <td> 
+      {% for new in tur3_table %}
+      <div class="card bg-success " >
+      <a class= "btn btn-sm btn-success  text-center font-weight-bold" href="./rezerveedit1/{{ new.id }}">{{ new.adet}} </a>
+      {% if new.tamucret == 'Açık' %}
+      <a class= "btn btn-sm btn-light  text-center " style="background-color:yellow;"  >{{ new.tarih }} </a>
+      {% else %}
+        <a class= "btn btn-sm btn-light text-dark  text-center " >{{ new.tarih}} </a>
+        {% endif %}
+      </div>
+      <hr class= " mt-1 mb-1 " >
+      {% endfor %}     
+      </td>
+      
+      <td> 
+        {% for new in tur4_table %}
+        <div class="card bg-warning " >
+        <a class= "btn btn-sm btn-warning  text-center font-weight-bold" href="./rezerveedit1/{{ new.id }}">{{ new.adet}} </a>
+        {% if new.tamucret == 'Açık' %}
+        <a class= "btn btn-sm btn-light  text-center " style="background-color:yellow;"  >{{ new.tarih }} </a>
+        {% else %}
+          <a class= "btn btn-sm btn-light text-dark  text-center " >{{ new.tarih}} </a>
+          {% endif %}
+        </div>
+        <hr class= " mt-1 mb-1 " >
+        {% endfor %}     
+        </td>
+
+      </tr>
+  
+      </tbody>
+  </table>
+
+</div>
+
+ 

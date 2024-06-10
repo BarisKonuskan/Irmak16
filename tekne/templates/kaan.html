@@ -1,0 +1,235 @@
+{% extends "layout.html" %}
+{% load static %}
+  {% block body %}
+
+
+
+
+  <div class="container" >    
+    <h4 class="mt-2 text-center text-dark font-weight-bold">KAAN</h4>
+    <input type="date" class="form-control mb-2 mr-sm-2" id="datepicker" name="tarih" placeholder="Tarih *" >  
+    {% if messages %}
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</div>
+    {% endfor %}
+  
+    {% endif %}
+  
+
+    <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+    <div class="row ">
+      <div class="col col-md-3">
+        <input type="text" class="form-control form-control-sm mb-2 mr-sm-2 text-white text-center font-weight-bold" id="totalInput1">
+
+  </div>
+  <div class="col col-md-3">
+
+    <input type="text" class="form-control form-control-sm mb-2 mr-sm-2  text-white text-center font-weight-bold" id="totalInput2">   
+
+</div>
+
+<div class="col col-md-3">
+  <input type="text" class="form-control form-control-sm mb-2 mr-sm-2 text-white text-center font-weight-bold" id="totalInput3">   
+</div>
+<div class="col col-md-3">
+
+<input type="text" class="form-control form-control-sm mb-2 mr-sm-2 text-white text-center font-weight-bold" id="totalInput4">
+</div>
+</div>
+
+<div class="container-fluid" >
+
+  <table class="table text-sm table-striped table-bordered" style="width:100%" id="myTable" >
+    <thead >
+   <tr >
+    
+              <th class="bg-primary text-center text-white font-weight-bold "style="width: 11.111%">07:00/12:00
+               
+              
+      </th>
+  
+      <th class="bg-info  text-center text-dark font-weight-bold" style=" width: 11.111%"  >12:30/17:30
+        
+      </th>
+
+       <th class="bg-success text-center text-dark font-weight-bold" style="width: 11.111%" >18:00/23:00
+        
+
+      </th>
+  
+          <th class="bg-warning text-center text-dark font-weight-bold" style="width: 11.111%" >24:00/07:00
+            
+   
+      </th>
+  
+      </tr>
+  
+    </thead>
+    <tbody>
+  
+     <tr>
+      
+  <td> 
+  {% for new in tur1_table %}
+  <div class="card bg-primary " >
+  <a class= "btn btn-sm btn-primary  text-center font-weight-bold" href="./rezerveedit1/{{ new.id }}">{{ new.adet}} </a>
+
+  {% if new.tamucret == 'Açık' %}
+<a class= "btn btn-sm btn-light  text-center " style="background-color:yellow;"  >{{ new.tarih }} </a>
+{% else %}
+  <a class= "btn btn-sm btn-light text-dark  text-center " >{{ new.tarih}} </a>
+  {% endif %}
+  </div>
+  <hr class= " mt-1 mb-1 " >
+  {% endfor %}     
+  </td>
+  
+  <td> 
+    {% for new in tur2_table %}
+    <div class="card bg-info " >
+    <a class= "btn btn-sm btn-info  text-center font-weight-bold" href="./rezerveedit1/{{ new.id }}">{{ new.adet}} </a>
+    {% if new.tamucret == 'Açık' %}
+    <a class= "btn btn-sm btn-light  text-center " style="background-color:yellow;"  >{{ new.tarih }} </a>
+    {% else %}
+      <a class= "btn btn-sm btn-light text-dark  text-center " >{{ new.tarih}} </a>
+      {% endif %}
+    </div>
+    <hr class= " mt-1 mb-1 " >
+    {% endfor %}     
+    </td>
+         
+    <td> 
+      {% for new in tur3_table %}
+      <div class="card bg-success " >
+      <a class= "btn btn-sm btn-success  text-center font-weight-bold" href="./rezerveedit1/{{ new.id }}">{{ new.adet}} </a>
+      {% if new.tamucret == 'Açık' %}
+<a class= "btn btn-sm btn-light  text-center " style="background-color:yellow;"  >{{ new.tarih }} </a>
+{% else %}
+  <a class= "btn btn-sm btn-light text-dark  text-center " >{{ new.tarih}} </a>
+  {% endif %}
+      </div>
+      <hr class= " mt-1 mb-1 " >
+      {% endfor %}     
+      </td>
+      
+      <td> 
+        {% for new in tur4_table %}
+        <div class="card bg-warning " >
+        <a class= "btn btn-sm btn-warning  text-center font-weight-bold" href="./rezerveedit1/{{ new.id }}">{{ new.adet}} </a>
+        {% if new.tamucret == 'Açık' %}
+        <a class= "btn btn-sm btn-light  text-center " style="background-color:yellow;"  >{{ new.tarih }} </a>
+        {% else %}
+          <a class= "btn btn-sm btn-light text-dark  text-center " >{{ new.tarih}} </a>
+          {% endif %}
+        </div>
+        <hr class= " mt-1 mb-1 " >
+        {% endfor %}     
+        </td>
+
+      </tr>
+  
+      </tbody>
+  </table>
+
+</div>
+
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/jquery-2.1.3.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+ 
+
+<script>    
+  window.addEventListener("DOMContentLoaded", function() {    
+    var today = new Date().toISOString().split('T')[0];  
+    document.getElementById("datepicker").value = today;  
+    calculateTotal(); 
+  });    
+</script>  
+
+<script>
+$(document).ready(function() {  
+  $('#datepicker').change(function() {  
+    var selectedDate = $(this).val();  
+    filterData(selectedDate);  
+
+  });  
+  
+  function filterData(selectedDate) {  
+    $.ajax({  
+      url: '/filter1',  
+      data: { date: selectedDate },  
+      success: function(response) {  
+        $('#myTable').html(response);  
+        calculateTotal(); 
+      }  
+    });  
+  }  
+});     
+</script>
+ <script>  
+var totalInput1 = document.getElementById('totalInput1');  
+var totalInput2 = document.getElementById('totalInput2');  
+var totalInput3 = document.getElementById('totalInput3');  
+var totalInput4 = document.getElementById('totalInput4');  
+  
+// İlgili kolonlardaki adetleri toplayan fonksiyon  
+function calculateTotal() {  
+  var total1 = 0;  
+  var total2 = 0;  
+  var total3 = 0;  
+  var total4 = 0;  
+  
+  // İlk kolon  
+  var tur1Adetler = document.querySelectorAll('#myTable tbody td:first-child .btn-primary');  
+  tur1Adetler.forEach(function(adetElement) {  
+    total1 += parseInt(adetElement.innerText);  
+  });  
+  totalInput1.value = Math.max(0, 9 - total1);  
+  if (parseInt(totalInput1.value) < 1) {  
+  totalInput1.style.backgroundColor = "red";  
+} else {  
+  totalInput1.style.backgroundColor = "green";  
+} 
+  
+  // İkinci kolon  
+  var tur2Adetler = document.querySelectorAll('#myTable tbody td:nth-child(2) .btn-info');  
+  tur2Adetler.forEach(function(adetElement) {  
+    total2 += parseInt(adetElement.innerText);  
+  });  
+  totalInput2.value = Math.max(0, 9 - total2);  
+  if (parseInt(totalInput2.value) < 1) {  
+  totalInput2.style.backgroundColor = "red";  
+} else {  
+  totalInput2.style.backgroundColor = "green";  
+}  
+  
+  // Üçüncü kolon  
+  var tur3Adetler = document.querySelectorAll('#myTable tbody td:nth-child(3) .btn-success');  
+  tur3Adetler.forEach(function(adetElement) {  
+    total3 += parseInt(adetElement.innerText);  
+  });  
+  totalInput3.value = Math.max(0, 9 - total3);
+  
+  if (parseInt(totalInput3.value) < 1) {  
+  totalInput3.style.backgroundColor = "red";  
+} else {  
+  totalInput3.style.backgroundColor = "green";  
+}  
+  
+  // Dördüncü kolon  
+  var tur4Adetler = document.querySelectorAll('#myTable tbody td:last-child .btn-warning');  
+  tur4Adetler.forEach(function(adetElement) {  
+    total4 += parseInt(adetElement.innerText);  
+  });  
+  totalInput4.value = Math.max(0, 9 - total4);
+  if (parseInt(totalInput4.value) < 1) {  
+  totalInput4.style.backgroundColor = "red";  
+} else {  
+  totalInput4.style.backgroundColor = "green";  
+}    
+}  
+          </script>  
+
+
+ {% endblock body %}
